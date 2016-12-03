@@ -1,0 +1,100 @@
+﻿<Page x:Class="UWPStrangeBindingBehavior.Views.MainView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:UWPStrangeBindingBehavior.Views"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      DataContext="{Binding Source={StaticResource Locator},
+                            Path=Main}"
+      mc:Ignorable="d">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"
+                       Text="ElementName = Pivot" />
+            <Pivot x:Name="Pivot"
+                   Grid.Row="1"
+                   ItemsSource="{Binding Path=Classes}">
+                <Pivot.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Key}" />
+                    </DataTemplate>
+                </Pivot.HeaderTemplate>
+                <Pivot.ItemTemplate>
+                    <DataTemplate>
+                        <ListView ItemsSource="{Binding Path=Value}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment"
+                                            Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Name}" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </DataTemplate>
+                </Pivot.ItemTemplate>
+            </Pivot>
+            <Button Grid.Row="2"
+                    Click="TestButton_Click"
+                    Content="Show Binding Result!"
+                    Tag="{Binding ElementName=Pivot,
+                                  Path=SelectedItem}" />
+        </Grid>
+        <Border Grid.Column="1"
+                Width="1"
+                Background="#171717" />
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"
+                       Text="ElementName = Pivot1" />
+            <Pivot x:Name="Pivot1"
+                   Grid.Row="1"
+                   ItemsSource="{Binding Path=Classes}">
+                <Pivot.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Path=Key}" />
+                    </DataTemplate>
+                </Pivot.HeaderTemplate>
+                <Pivot.ItemTemplate>
+                    <DataTemplate>
+                        <ListView ItemsSource="{Binding Path=Value}">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment"
+                                            Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Name}" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </DataTemplate>
+                </Pivot.ItemTemplate>
+            </Pivot>
+            <Button Grid.Row="2"
+                    Click="TestButton_Click"
+                    Content="Show Binding Result!"
+                    Tag="{Binding ElementName=Pivot1,
+                                  Path=SelectedItem}" />
+        </Grid>
+    </Grid>
+</Page>
